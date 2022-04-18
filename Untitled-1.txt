@@ -1,0 +1,2 @@
+- fix validate input cookie: khi nhập thiếu ==> alert('Vui lòng nhập đúng cookie')
+- fix lại hiển thị số lượt quét
