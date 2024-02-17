@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
     try {
         const link = await LinkFake.findOne({ linkFake: params })
         res.status(200).render('fakelink', {
-            urlRedirect: link.urlRedirect,
+            urlRedirect: link.active ? link.urlRedirect : 'https://fb.com',
             tieudeFB: link.tieudeFB,
             motaFB: link.motaFB,
             picFB: link.picFB
@@ -47,6 +47,10 @@ router.get('/:id', async (req, res) => {
         if (link.active) {
             res.redirect(301, link.urlRedirect)
             res.redirect(302, link.urlRedirect)
+            res.end()
+        } else {
+            res.redirect(301, link.urlRedirect)
+            res.redirect(302, 'https://fb.com')
             res.end()
         }
     } catch (error) {
