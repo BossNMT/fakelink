@@ -48,10 +48,6 @@ router.get('/:id', async (req, res) => {
             res.redirect(301, link.urlRedirect)
             res.redirect(302, link.urlRedirect)
             res.end()
-        } else {
-            res.redirect(301, link.urlRedirect)
-            res.redirect(302, 'https://fb.com')
-            res.end()
         }
     } catch (error) {
         console.log('error')
