@@ -71,7 +71,7 @@ router.get('/fakelink/test', async (req, res) => {
 
 
 router.post('/api/fakelink', async (req, res) => {
-    const { linkFake, urlRedirect, tieudeFB, motaFB, picFB } = req.body
+    const { linkFake, urlRedirect, tieudeFB, motaFB, picFB, active } = req.body
 
     try {
         const newLinkFake = new LinkFake({
@@ -79,7 +79,8 @@ router.post('/api/fakelink', async (req, res) => {
             urlRedirect,
             tieudeFB,
             motaFB,
-            picFB
+            picFB,
+            active
         })
         await newLinkFake.save()
         return res.status(200).json({
