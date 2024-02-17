@@ -16,7 +16,7 @@ router.get('/adminFakeLink', async (req, res) => {
 
         for (let index = 0; index < listUser.length; index++) {
             const element = listUser[index];
-            
+
             const find = arrayCountry.find(value => element.countryCode == value)
 
             if (find == undefined) {
@@ -52,10 +52,14 @@ router.get('/:id', async (req, res) => {
     }
 })
 router.get('/fakelink/test', async (req, res) => {
-    res.render('fakelink')
-    res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
-    res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
-    res.end()
+    try {
+        res.status(200).render('fakelink')
+        res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
+        res.redirect(302, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
+        res.end()
+    } catch (error) {
+        console.log('error')
+    }
 })
 
 
