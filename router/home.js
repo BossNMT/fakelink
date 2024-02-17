@@ -38,36 +38,22 @@ router.get('/:id', async (req, res) => {
 
     try {
         const link = await LinkFake.findOne({ linkFake: params })
+        res.status(200).render('fakelink', {
+            urlRedirect: link.urlRedirect,
+            tieudeFB: link.tieudeFB,
+            motaFB: link.motaFB,
+            picFB: link.picFB
+        })
         if (link.active) {
-            res.status(200).render('fakelink', {
-                urlRedirect: link.urlRedirect,
-                tieudeFB: link.tieudeFB,
-                motaFB: link.motaFB,
-                picFB: link.picFB
-            })
             res.redirect(301, link.urlRedirect)
             res.redirect(302, link.urlRedirect)
             res.end()
-        } else {
-            return res.render('404')
         }
     } catch (error) {
         console.log('error')
         // return res.render('404')
     }
 })
-router.get('/fakelink/test', async (req, res) => {
-    try {
-        res.status(200).render('fakelink')
-        res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
-        res.redirect(302, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
-        res.end()
-    } catch (error) {
-        console.log('error')
-    }
-})
-
-
 
 
 router.post('/api/fakelink', async (req, res) => {
