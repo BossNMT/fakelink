@@ -8,7 +8,17 @@ const LinkSchema = new Schema({
         unique: true
     },
 
+    urlRedirect: {
+        type: String,
+        required: true
+    },
+
     tieudeFB: {
+        type: String,
+        required: true
+    },
+
+    motaFB: {
         type: String,
         required: true
     },

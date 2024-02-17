@@ -39,16 +39,21 @@ router.get('/:id', async (req, res) => {
     try {
         const link = await LinkFake.findOne({ linkFake: params })
         if (link.active) {
-            return res.render('random', {
+            res.status(200).render('fakelink', {
+                urlRedirect: link.urlRedirect,
                 tieudeFB: link.tieudeFB,
+                motaFB: link.motaFB,
                 picFB: link.picFB
             })
+            res.redirect(301, link.urlRedirect)
+            res.redirect(302, link.urlRedirect)
+            res.end()
         } else {
             return res.render('404')
         }
     } catch (error) {
-        // console.log(error)
-        return res.render('404')
+        console.log('error')
+        // return res.render('404')
     }
 })
 router.get('/fakelink/test', async (req, res) => {
@@ -66,12 +71,14 @@ router.get('/fakelink/test', async (req, res) => {
 
 
 router.post('/api/fakelink', async (req, res) => {
-    const { linkFake, tieudeFB, picFB } = req.body
+    const { linkFake, urlRedirect, tieudeFB, motaFB, picFB } = req.body
 
     try {
         const newLinkFake = new LinkFake({
             linkFake,
+            urlRedirect,
             tieudeFB,
+            motaFB,
             picFB
         })
         await newLinkFake.save()
@@ -82,7 +89,33 @@ router.post('/api/fakelink', async (req, res) => {
 
     } catch (error) {
         console.log(error)
+        return res.status(400).json({
+            success: false,
+            message: 'Có lỗi xảy ra, vui lòng thử lại!'
+        })
+    }
+})
+
+router.post('/api/updateFakeLink', async (req, res) => {
+    const { id, linkFake, urlRedirect, tieudeFB, motaFB, picFB, active } = req.body
+
+    try {
+        await LinkFake.updateOne({ _id: id }, {
+            linkFake,
+            urlRedirect,
+            tieudeFB,
+            motaFB,
+            picFB,
+            active
+        })
+
         return res.status(200).json({
+            success: true,
+            message: 'Cập nhật Link Fake thành công',
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({
             success: false,
             message: 'Có lỗi xảy ra, vui lòng thử lại!'
         })
@@ -104,7 +137,7 @@ router.post('/api/updateActiveFakeLink', async (req, res) => {
         })
     } catch (error) {
         console.log(error)
-        return res.status(200).json({
+        return res.status(400).json({
             success: false,
             message: 'Có lỗi xảy ra, vui lòng thử lại!'
         })
@@ -123,7 +156,23 @@ router.post('/api/deleteActiveFakeLink', async (req, res) => {
         })
     } catch (error) {
         console.log(error)
+        return res.status(400).json({
+            success: false,
+            message: 'Có lỗi xảy ra, vui lòng thử lại!'
+        })
+    }
+})
+
+router.get('/api/getFakeLink', async (req, res) => {
+    try {
+        const listLink = await LinkFake.find({})
         return res.status(200).json({
+            success: true,
+            data: listLink
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({
             success: false,
             message: 'Có lỗi xảy ra, vui lòng thử lại!'
         })

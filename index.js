@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 1473;
 const router = require('./router');
 const handlebars = require('express-handlebars');
+const cors = require('cors')
 
 const methodOverride = require('method-override');
 // const cookieParser = require('cookie-parser');
@@ -28,6 +29,9 @@ mongoose.connect(mongoDB)
 
 //Cấu hình phương thức GET, POST, PUT, PATCH
 app.use(methodOverride('_method'))
+
+//Cấu hình CORS
+app.use(cors())
 
 //Cấu hình handlebars
 app.engine('hbs', handlebars({

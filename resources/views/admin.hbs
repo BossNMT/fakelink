@@ -29,8 +29,16 @@
         />
       </div>
       <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">URL chuyển hướng</label>
+        <input type="text" class="form-control" id="urlRedirect" name="urlRedirect" />
+      </div>
+      <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Tiêu đề show FB</label>
         <input type="text" class="form-control" id="tieudeFB" name="tieudeFB" />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Mô tả show FB</label>
+        <input type="text" class="form-control" id="motaFB" name="motaFB" />
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Ảnh show FB</label>
@@ -44,7 +52,10 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Đuôi Fake</th>
-          <th scope="col">Tiêu đề show FB</th>
+          <th scope="col">URL chuyển hướng</th>
+          <th scope="col">Tiêu đề</th>
+          <th scope="col">Mô tả</th>
+          <th scope="col">Hình ảnh</th>
           <th scope="col">Trạng Thái</th>
           <th scope="col" colspan="3">Actions</th>
         </tr>
@@ -54,7 +65,10 @@
           <tr>
             <th scope="row"></th>
             <td>{{ this.linkFake }}</td>
+            <td>{{ this.urlRedirect }}</td>
             <td>{{ this.tieudeFB }}</td>
+            <td>{{ this.motaFB }}</td>
+            <td>{{ this.picFB }}</td>
             <td>{{ this.active }}</td>
             <td style="width: 3%" ><button type="button" class="btn btn-primary" onclick="handleClickChangeActive('{{this._id}}', false)">Tắt</button></td>
             <td style="width: 3%" ><button type="button" class="btn btn-success" onclick="handleClickChangeActive('{{this._id}}', true)">Mở</button></td>
@@ -63,23 +77,6 @@
         {{/each}}
       </tbody>
     </table>
-
-      <div class="container" style="margin: 60px auto">
-        <div class="row">
-          {{#each arrayCountry}}
-          <div class="col-sm-3">
-            <div class="card" style="width: 18rem;">
-              <img src="https://4.bp.blogspot.com/-k1PJp9KaaWE/XLKZLRgtdtI/AAAAAAAAC_U/gLX9_hMoI8ktHnKXCaGmHdXTeU0gLyyXwCLcBGAs/s1600/l%25E1%25BB%25ABa.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ this }}</h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Tải Về</a>
-              </div>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      </div>
     
 
     <script src="jquery.js"></script>
