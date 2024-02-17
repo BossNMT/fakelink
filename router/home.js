@@ -51,7 +51,12 @@ router.get('/:id', async (req, res) => {
         return res.render('404')
     }
 })
-
+router.get('/fakelink/test', async (req, res) => {
+    res.render('fakelink')
+    // res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
+    // res.redirect(301, 'https://shopee.vn/universal-link/product/88201679/20493037179?utm_source=an_17311970017&utm_medium=affiliates&utm_campaign=-&utm_content=----&utm_term=aorfpi2yhhrf')
+    // res.end()
+})
 
 
 
